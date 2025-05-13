@@ -1,48 +1,17 @@
-import books from "../books.js"; 
-import express from "express";
+import express from 'express';
+import { addBook, deleteBook, getAllBooks, getBookById, updateBook } from '../controllers/book.controller.js';
 
-const router = express.Router();
+const router = express.Router()
 
-router.get("/", (req, res) => {
-    res.json(books);
-});
+router.get('/',getAllBooks)
 
-router.get("/:id", (req, res) => {
-    const id = req.params.id;
-    const book = books.find((book) => book.id == id);
-    if (book) {
-        res.json(book);
-    } else {
-        res.status(404).json({ message: "Book not found" });
-    }
-});
+router.get('/:id',getBookById)
+    
+router.post('/',addBook)
+ 
 
-router.post("/", (req, res) => {
-    const newBook = req.body;
-    books.push(newBook);
-    res.status(201).json(newBook);
-});
+router.put('/:id',updateBook)
 
-router.put("/:id", (req, res) => {
-    const id = req.params.id;
-    const index = books.findIndex((book) => book.id == id);
-    if (index !== -1) {
-        books[index] = { ...books[index], ...req.body };
-        res.json(books[index]);
-    } else {
-        res.status(404).json({ message: "Book not found" });
-    }
-});
+router.delete('/:id',deleteBook)
 
-router.delete("/:id", (req, res) => {
-    const id = req.params.id;
-    const index = books.findIndex((book) => book.id == id);
-    if (index !== -1) {
-        books.splice(index, 1);
-        res.status(204).end();
-    } else {
-        res.status(404).json({ message: "Book not found" });
-    }
-});
-
-export default router;
+export default router
