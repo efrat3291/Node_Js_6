@@ -10,4 +10,4 @@ const bookSchema = new Schema({
         email: String,
     }
 });
-export default model("Books", bookSchema);
+export default model("books", bookSchema);

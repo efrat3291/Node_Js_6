@@ -21,7 +21,7 @@ export const getBookById = async (req, res, next) => {
     }
 }
 
-export const createBook = async (req, res, next) => {
+export const addBook = async (req, res, next) => {
     try{
         const {name, price, categories, writer} = req.body;
         const newBook = new Books({name, price, categories, writer});
